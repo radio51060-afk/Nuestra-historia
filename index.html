@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Nuestro Diario | Mes 1</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
@@ -15,13 +15,20 @@
             --blanco: #FFFFFF;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; /* Quita el destello feo al tocar botones en iPhone */
+        }
 
         body {
             background-color: var(--rosa-fondo);
             font-family: 'Lexend', sans-serif;
             color: var(--texto-oscuro);
             overflow-x: hidden;
+            /* Protege el contenido para que no lo tape el 'notch' del iPhone */
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         /* --- BARRA DE NAVEGACIÓN --- */
@@ -31,10 +38,11 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); /* Soporte extra para Safari */
             display: flex;
             justify-content: center;
             gap: 20px;
-            padding: 15px;
+            padding: calc(15px + env(safe-area-inset-top)) 15px 15px;
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
@@ -47,6 +55,7 @@
             text-decoration: none;
             color: var(--texto-claro);
             transition: all 0.3s ease;
+            white-space: nowrap; /* Evita que el texto del botón se parta */
         }
 
         .nav-pill.active {
@@ -60,25 +69,23 @@
             cursor: not-allowed;
         }
 
-        /* --- INTRODUCCIÓN A PANTALLA COMPLETA (NUEVO) --- */
+        /* --- INTRODUCCIÓN A PANTALLA COMPLETA --- */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: calc(80px + env(safe-area-inset-top)) 20px 40px;
             position: relative;
-            /* Si tienes una foto de ustedes muy horizontal y bonita, 
-               puedes descomentar la línea de abajo y poner el nombre de tu foto */
-            /* background: linear-gradient(rgba(255, 240, 246, 0.9), rgba(255, 240, 246, 0.9)), url('tu-foto-portada.jpg') center/cover; */
         }
 
         .hero-content {
             max-width: 800px;
             animation: fadeUpIn 1.5s ease-out;
+            width: 100%;
         }
 
         .hero h1 {
@@ -111,7 +118,6 @@
             border: 1px solid rgba(228, 0, 124, 0.1);
         }
 
-        /* Comillas decorativas */
         .hero-letter::before {
             content: '“';
             position: absolute;
@@ -128,10 +134,9 @@
             font-weight: 600;
         }
 
-        /* Flecha animada de scroll */
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: max(30px, env(safe-area-inset-bottom));
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
@@ -235,6 +240,7 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             position: relative;
+            background-color: var(--blanco); /* Fondo blanco por si la foto tarda en cargar */
         }
 
         .media-container img, .media-container video {
@@ -248,16 +254,38 @@
 
         .media-container:hover img { transform: scale(1.03); }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE OPTIMIZADO PARA IPHONE/MÓVILES --- */
         @media screen and (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
+            .navbar {
+                flex-wrap: wrap; /* Evita que los botones se empalmen */
+                gap: 10px;
+                padding: calc(10px + env(safe-area-inset-top)) 10px 10px;
+            }
+            .nav-pill { padding: 6px 14px; font-size: 0.8rem; }
+            
             .hero-letter { padding: 25px; font-size: 1rem; }
-            .timeline::before { left: 30px; }
-            .dia-card, .dia-card:nth-child(even) { flex-direction: column; align-items: flex-end; }
-            .dia-info { width: calc(100% - 60px); margin-bottom: 20px; }
-            .media-container { width: calc(100% - 60px); }
+            .hero-letter::before { left: 10px; font-size: 4rem; top: -5px; }
+            
+            .timeline { padding: 40px 15px 80px; }
+            
+            /* Línea de tiempo reajustada para que calce perfecto */
+            .timeline::before { left: 25px; transform: none; }
+            
+            .dia-card, .dia-card:nth-child(even) { 
+                flex-direction: column; 
+                align-items: flex-end; 
+                margin-bottom: 40px;
+            }
+            
+            .dia-info, .media-container { width: calc(100% - 45px); }
+            .dia-info { margin-bottom: 15px; padding: 20px; }
+            
+            /* Matemáticamente alineado a la línea en cualquier pantalla móvil */
             .dia-card:nth-child(odd) .dia-info::before, 
-            .dia-card:nth-child(even) .dia-info::before { left: -38px; }
+            .dia-card:nth-child(even) .dia-info::before { 
+                left: -32px; 
+                right: auto;
+            }
         }
     </style>
 </head>
@@ -272,7 +300,8 @@
 
     <!-- INTRODUCCIÓN PANTALLA COMPLETA -->
     <section class="hero">
-<div class="hero-letter">
+        <div class="hero-content">
+            <div class="hero-letter">
                 <p>Hola, mi linda novia.</p>
                 <br>
                 <p>Hoy cumplimos nuestro primer mes oficial. Aunque este día nos toca pasarlo a distancia porque sigues de viaje, quiero que sepas que no hay un solo momento del día en el que no te extrañe, y ya estoy contando las horas para poder verte mañana en cuanto regreses.</p>
@@ -283,6 +312,7 @@
                 <br>
                 <p>Hice este pequeño rincón para guardar nuestros recuerdos y que nunca olvidemos cómo empezó nuestra historia. Te quiero muchísimo, Alincita.</p>
             </div>
+        </div>
         <div class="scroll-indicator">↓</div>
     </section>
 
@@ -293,11 +323,13 @@
             <div class="dia-info">
                 <div class="fecha-badge">Antes del 3 de Abril</div>
                 <h2>El Prólogo</h2>
-                <p>El detrás de cámaras. Grabé cómo hice posible ese día desde cero, Fue un mes completo de emociones y atrasos pero cada esfuerzo y cada línea de código valió la pena para llegar hasta aquí.</p>
+                <p>El detrás de cámaras. Grabé cómo hice posible ese día desde cero. Fue un mes completo de emociones y atrasos pero cada esfuerzo y cada línea de código valió la pena para llegar hasta aquí.</p>
             </div>
             <div class="media-container">
-                <video controls poster="portada-prologo.jpg">
+                <!-- Se agregó 'playsinline' vital para iOS -->
+                <video controls playsinline poster="portada-prologo.jpg">
                     <source src="video-prologo.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
                 </video>
             </div>
         </div>
