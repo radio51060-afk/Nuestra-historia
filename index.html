@@ -19,7 +19,7 @@
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; /* Quita el destello feo al tocar botones en iPhone */
+            -webkit-tap-highlight-color: transparent; 
         }
 
         body {
@@ -27,7 +27,6 @@
             font-family: 'Lexend', sans-serif;
             color: var(--texto-oscuro);
             overflow-x: hidden;
-            /* Protege el contenido para que no lo tape el 'notch' del iPhone */
             padding-bottom: env(safe-area-inset-bottom);
         }
 
@@ -38,7 +37,7 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); /* Soporte extra para Safari */
+            -webkit-backdrop-filter: blur(12px); 
             display: flex;
             justify-content: center;
             gap: 20px;
@@ -55,7 +54,7 @@
             text-decoration: none;
             color: var(--texto-claro);
             transition: all 0.3s ease;
-            white-space: nowrap; /* Evita que el texto del botón se parta */
+            white-space: nowrap; 
         }
 
         .nav-pill.active {
@@ -240,7 +239,7 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             position: relative;
-            background-color: var(--blanco); /* Fondo blanco por si la foto tarda en cargar */
+            background-color: var(--blanco); 
         }
 
         .media-container img, .media-container video {
@@ -254,10 +253,10 @@
 
         .media-container:hover img { transform: scale(1.03); }
 
-        /* --- RESPONSIVE OPTIMIZADO PARA IPHONE/MÓVILES --- */
+        /* --- RESPONSIVE OPTIMIZADO PARA TABLETS Y PANTALLAS MEDIANAS --- */
         @media screen and (max-width: 768px) {
             .navbar {
-                flex-wrap: wrap; /* Evita que los botones se empalmen */
+                flex-wrap: wrap; 
                 gap: 10px;
                 padding: calc(10px + env(safe-area-inset-top)) 10px 10px;
             }
@@ -267,8 +266,6 @@
             .hero-letter::before { left: 10px; font-size: 4rem; top: -5px; }
             
             .timeline { padding: 40px 15px 80px; }
-            
-            /* Línea de tiempo reajustada para que calce perfecto */
             .timeline::before { left: 25px; transform: none; }
             
             .dia-card, .dia-card:nth-child(even) { 
@@ -280,251 +277,18 @@
             .dia-info, .media-container { width: calc(100% - 45px); }
             .dia-info { margin-bottom: 15px; padding: 20px; }
             
-            /* Matemáticamente alineado a la línea en cualquier pantalla móvil */
             .dia-card:nth-child(odd) .dia-info::before, 
             .dia-card:nth-child(even) .dia-info::before { 
                 left: -32px; 
                 right: auto;
             }
         }
-    </style>
-</head>
-<body>
 
-    <!-- NAVEGACIÓN -->
-    <nav class="navbar">
-        <a href="#" class="nav-pill active">Mes 1</a>
-        <a href="#" class="nav-pill locked">Mes 2 (Próximamente)</a>
-        <a href="#" class="nav-pill locked">Mes 3</a>
-    </nav>
-
-    <!-- INTRODUCCIÓN PANTALLA COMPLETA -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-letter">
-                <p>Hola, mi linda novia.</p>
-                <br>
-                <p>Hoy cumplimos nuestro primer mes oficial. Aunque este día nos toca pasarlo a distancia porque sigues de viaje, quiero que sepas que no hay un solo momento del día en el que no te extrañe, y ya estoy contando las horas para poder verte mañana en cuanto regreses.</p>
-                <br>
-                <p>Ha sido un mes increíble. Me encanta darme cuenta de que, incluso cuando los planes cambian o los días se complican, <span>tu compañía siempre logra apaciguar cualquier angustia</span> y hace que todo valga la pena. Cada ida al cine, cada plática, cada risa y cada momento que compartimos me confirman lo mucho que me gusta estar contigo.</p>
-                <br>
-                <p>Gracias por ser como eres. Valoro muchísimo lo comprensiva que eres, por escucharme cuando me equivoco y por hacer equipo conmigo.</p>
-                <br>
-                <p>Hice este pequeño rincón para guardar nuestros recuerdos y que nunca olvidemos cómo empezó nuestra historia. Te quiero muchísimo, Alincita.</p>
-            </div>
-        </div>
-        <div class="scroll-indicator">↓</div>
-    </section>
-
-    <!-- TIMELINE (Empieza la historia) -->
-    <section class="timeline">
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">Antes del 3 de Abril</div>
-                <h2>El Prólogo</h2>
-                <p>El detrás de cámaras. Grabé cómo hice posible ese día desde cero. Fue un mes completo de emociones y atrasos pero cada esfuerzo y cada línea de código valió la pena para llegar hasta aquí.</p>
-            </div>
-            <div class="media-container">
-                <!-- Se agregó 'playsinline' vital para iOS -->
-                <video controls playsinline poster="portada-prologo.jpg">
-                    <source src="video-prologo.mp4" type="video/mp4">
-                    Tu navegador no soporta videos.
-                </video>
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">3 de Abril, 7:24 PM</div>
-                <h2>El Gran "Sí"</h2>
-                <p>El contador llegó a cero, las coordenadas revelaron la sorpresa en la terraza y finalmente te pedí que fueras mi novia. El inicio oficial de nuestra bonita historia de amor.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-3abril.jpg" alt="Propuesta en la terraza">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">4 de Abril</div>
-                <h2>Primer día oficial</h2>
-                <p>Fuimos a Parque Aztlán. Fue muy divertido subirnos a la rueda de la fortuna y pasar un momento tan agradable junto a tu mamá, tu hermana y Mia.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-4abril.jpg" alt="Parque Aztlán">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">5 de Abril</div>
-                <h2>El incidente del carro</h2>
-                <p>Ese día me iba a regresar a Puebla, pero la caja de velocidades falló. Estaba muy angustiado, pero gracias a tu compañía lograste apaciguar ese complicado momento.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-5abril.jpg" alt="El carro fallando">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">6 de Abril</div>
-                <h2>Día de chambear</h2>
-                <p>Encontramos mecánico gracias a tu familia. Mientras reparaban el carro, pasé el día con tus papás ayudando en lo que pude en sus negocios. En la tarde, fuimos al cine oficialmente como novios :) </p>
-            </div>
-            <div class="media-container">
-                <img src="foto-6abril.jpg" alt="Ayudando en el negocio">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">7 de Abril</div>
-                <h2>Carrito reparado y despedida</h2>
-                <p>Me entregaron el carro. Pasé por ti al trabajo, escuchamos música y la pasamos increíble como siempre. Fuimos al cine de nuevo con tu mamá y tu hermano antes de regresar a Puebla. No hubo día que no dejara pensara en ti.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-7abril.jpg" alt="Regreso a Puebla">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">17 de Abril</div>
-                <h2>El reencuentro</h2>
-                <p>Después de muchos días, por fin pude ver a mi linda novia. Fui por ti al trabajo, dejamos mi lap, fuimos por un cafe y por fin pudimos comer los ricos tacos Tony y aunque tuvimos un pequeño accidente con el carro (jajaja), fue un día hermoso solo por estar contigo.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-17abril.jpg" alt="Reencuentro">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">18 de Abril</div>
-                <h2>Auditorio Nacional</h2>
-                <p>Primera vez que iba al Auditorio Nacional y cumplí una meta más estando contigo en CDMX. Fue aún más especial porque fuimos con tus papás y la pasamos muy bien.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-18abril.jpg" alt="Auditorio Nacional">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">19 de Abril</div>
-                <h2>Domingo de novios</h2>
-                <p>Aventuras por toda la CDMX buscando cierto lugarcito. Ese día te entregué tus primeras flores oficialmente como novio. Despedirme de ti siempre es lo que menos me gusta :( </p>
-            </div>
-            <div class="media-container">
-                <img src="foto-19abril.jpg" alt="Flores de novio">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">22 de Abril</div>
-                <h2>Cualquier distancia por ti</h2>
-                <p>Tenía que ir a Pachuca por trabajo. Tuviste un mal día, así que en lugar de regresar a Puebla, tomé el camión a CDMX solo para darte ánimos, unos chocolatitos y unas florecitas. Fueron solo 30 minutos, pero haría lo que fuera por verte sonreír.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-22abril.jpg" alt="Girasoles y chocolates">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">24 de Abril</div>
-                <h2>Cemitas y disculpas</h2>
-                <p>Regresé a CDMX después del trabajo y te llevé cemitas. Sé que ese día no me porté como debía y me lamenté por mi comportamiento, pero te agradezco por escuchar mis disculpas y seguir avanzando juntos.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-24abril.jpg" alt="Cemitas">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">25 de Abril</div>
-                <h2>El Estadio Azteca</h2>
-                <p>Estuvimos en tu casa y luego fuimos al Estadio con Verde, Jac y Lalo. Valoro inmensamente que, aunque pudiste aprovechar el día para trabajar y no querías ir, decidiste acompañarnos porque sabías que yo quería conocerlo.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-25abril.jpg" alt="Estadio Azteca">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">26 de Abril</div>
-                <h2>Otra triste despedida</h2>
-                <p>Pasamos la tarde en tu casa antes de tener que decirnos adiós nuevamente. Los días separados los pasamos chateando, extrañándote a cada instante.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-26abril.jpg" alt="Tarde en su casa">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">29 de Abril</div>
-                <h2>Visita rápida</h2>
-                <p>Regresé a CDMX para una entrevista y pude pasar a verte para comer algo rico y ver ropa, justo un día antes de que te fueras de viaje con tu familia.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-29abril.jpg" alt="En la tienda de ropa">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">30 de Abril</div>
-                <h2>De aquí para allá</h2>
-                <p>Aquel día seguia en CDMX sin embargo tuve que ir a Puebla desde temprano para luego ir a Pachuca por trabajo, regresé a CDMX solo para poder pasar nuestro ratito de novios antes de tu viaje. Valió completamente la pena.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-30abril.jpg" alt="Despedida antes del viaje">
-            </div>
-        </div>
-
-        <div class="dia-card">
-            <div class="dia-info">
-                <div class="fecha-badge">3 de Mayo</div>
-                <h2>¡Primer mes!</h2>
-                <p>Hoy cumplimos un mes. Lo pasamos a distancia porque sigues de viaje, pero yo sigo en CDMX para poder estar contigo mañana en cuanto regreses. No hay momento que no te extrañe ni recuerde lo mucho que te quiero, muchas gracias por este primer mes de tilines, TE AMO ♡.</p>
-            </div>
-            <div class="media-container">
-                <img src="foto-3mayo.jpg" alt="Esperándote en CDMX">
-            </div>
-        </div>
-
-    </section>
-
-    <!-- SCRIPT PARA ANIMACIONES -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.dia-card');
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); 
-                    }
-                });
-            }, observerOptions);
-
-            cards.forEach(card => {
-                observer.observe(card);
-            });
-        });
-    </script>
-</body>
-</html>
+        /* --- OPTIMIZACIÓN ESTRICTA PARA CELULARES PEQUEÑOS --- */
+        @media screen and (max-width: 480px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-letter { padding: 20px 15px; font-size: 0.95rem; line-height: 1.6; }
+            .dia-info { padding: 18px 15px; }
+            .dia-info h2 { font-size: 1.3rem; }
+            .dia-info p { font-size: 0.9rem; }
+            .fecha-badge { font-size:
